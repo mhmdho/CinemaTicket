@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .room-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .room-card {
+        flex: 1 1 calc(33.333% - 15px); /* 3 in a row with spacing */
+        max-width: calc(30% - 15px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+        text-align: center;
+        transition: transform 0.2s ease;
+    }
+
+    .room-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .room-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3; /* Optional: keep consistent image proportions */
+        object-fit: cover;
+    }
+
+    .room-card h3 {
+        margin: 10px 0;
+    }
+
+    .room-card a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .room-card a:hover {
+        text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+        .room-card {
+            flex: 1 1 calc(50% - 10px);
+            max-width: calc(50% - 10px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .room-card {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
+</style>
+
+<h2 style="text-align: center; margin-bottom: 30px;">Select a Room</h2>
+<p style="text-align: center; margin-bottom: 30px;">Browse rooms and select one to see showtimes.</p>
+
+<div class="room-grid">
+    {% for room in rooms %}
+        <div class="room-card">
+            {% if room.image %}
+                <img src="{{ room.image.url }}" alt="{{ room.name }}">
+            {% else %}
+                <div style="height: 150px; background-color: #eee; line-height: 150px; color: #999;">
+                    No Image
+                </div>
+            {% endif %}
+            <h3><a href="{% url 'showtimes' room.id %}">{{ room.name }}</a></h3>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

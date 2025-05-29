@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cinema Booking - {% block title %}Home{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter :wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+
+            /* Flexbox setup */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #809cbb;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .user-info {
+            font-size: 14px;
+        }
+
+        .user-info a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+
+        main {
+            padding: 20px 40px;
+            flex: 1; /* This makes main take up remaining space */
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #888;
+            border-top: 1px solid #e9ecef;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <h1><a href="/" style="color: white; text-decoration: none;">Cinema Booking</a></h1>
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            Welcome, {{ user.username }} |
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        &copy; 2025 Cinema Booking App. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>

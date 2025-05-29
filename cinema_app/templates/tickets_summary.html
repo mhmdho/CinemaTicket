@@ -1,0 +1,89 @@
+<!-- cinema_app/templates/tickets_summary.html -->
+
+{% extends "base.html" %}
+{% block title %}Your Tickets{% endblock %}
+{% block content %}
+
+<style>
+    .tickets-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        font-family: monospace;
+        color: #333;
+    }
+
+    .ticket-card {
+        background-color: white;
+        border: 2px dashed #ccc;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+
+    .ticket-header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .ticket-row {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .ticket-row strong {
+        display: inline-block;
+        width: 140px;
+    }
+
+    .print-button {
+        display: block;
+        margin: 30px auto;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    @media print {
+        body {
+            background-color: white;
+        }
+        .ticket-card {
+            box-shadow: none;
+            border: 2px dashed #000;
+        }
+        .print-button {
+            display: none;
+        }
+    }
+</style>
+
+<div class="tickets-container">
+
+    {% for booking in bookings %}
+    
+    <div class="ticket-card">
+            <div class="ticket-header">
+                🎬 Cinema Booking App<br>
+                <small>Ticket</small>
+                <hr>
+            </div>
+            <div class="ticket-row"><strong>Movie:</strong> {{ movie.title }}</div>
+            <div class="ticket-row"><strong>Room:</strong> {{ room.name }}</div>
+            <div class="ticket-row"><strong>Date & Time:</strong> {{ showtime.start_time|date:"D d M Y - H:i" }}</div>
+            <div class="ticket-row"><strong>Seat:</strong> Row {{ booking.seat_row }}, Seat {{ booking.seat_number }}</div>
+            <div class="ticket-row"><strong>User:</strong> {{ booking.user.username }}</div>
+        </div>
+    {% endfor %}
+
+    <button class="print-button" onclick="window.print()">🖨️ Print All Tickets</button>
+</div>
+
+{% endblock %}

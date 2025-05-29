@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .showtimes-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .showtimes-header h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .showtimes-header p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .showtime-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .showtime-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        width: 300px;
+        transition: transform 0.2s ease;
+    }
+
+    .showtime-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .showtime-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .showtime-body {
+        padding: 15px;
+    }
+
+    .showtime-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    .showtime-time {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .book-button-wrapper {
+        margin-top: 15px;
+    }
+
+    .book-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background-color 0.2s ease;
+    }
+
+    .book-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="showtimes-header">
+    <h2>Showtimes in {{ room.name }}</h2>
+    <p>Select a movie to choose your seat</p>
+</div>
+
+<div class="showtime-grid">
+    {% for showtime in showtimes %}
+        <div class="showtime-card">
+            {% if showtime.movie.poster %}
+                <img src="{{ showtime.movie.poster.url }}" alt="{{ showtime.movie.title }}" class="showtime-image">
+            {% else %}
+                <div style="height: 200px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                    No Poster
+                </div>
+            {% endif %}
+            <div class="showtime-body">
+                <h3 class="showtime-title">{{ showtime.movie.title }}</h3>
+                <p class="showtime-time">🕒 {{ showtime.start_time|date:"D d M Y - H:i" }}</p>
+                <div class="book-button-wrapper">
+                    <a href="{% url 'select_seat' showtime.id %}" class="book-button">Select Seat</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
