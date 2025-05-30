@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from rest_framework.routers import DefaultRouter
 from cinema_app.views.api_views import BookSeatAPI
@@ -40,3 +42,5 @@ urlpatterns = [
     path('api/rooms/<int:room_id>/movies/', RoomMovieListAPI.as_view(), name='api_room_movies'),
     path('api/tickets/', UserTicketListAPI.as_view(), name='api_user_tickets'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
