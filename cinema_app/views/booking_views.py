@@ -59,7 +59,7 @@ def book_seat(request, showtime_id, row, seat):
     showtime = get_object_or_404(Showtime, id=showtime_id)
     user = request.user
 
-    # Check if the seat is already booked by the current user
+    # already booked seats by the current user
     booking = Booking.objects.filter(
         showtime=showtime,
         seat_row=row,
@@ -68,10 +68,10 @@ def book_seat(request, showtime_id, row, seat):
     ).first()
 
     if booking:
-        # User is unbooking their own seat
+        # unbooking seats by the user
         booking.delete()
     else:
-        # Check if the seat is already booked by someone else
+        # seats booked by others
         if Booking.objects.filter(
             showtime=showtime,
             seat_row=row,
@@ -80,7 +80,7 @@ def book_seat(request, showtime_id, row, seat):
             # Seat is taken by another user – do nothing or show message
             pass
         else:
-            # Book the seat for the current user
+            # Book seats
             Booking.objects.create(
                 user=user,
                 showtime=showtime,

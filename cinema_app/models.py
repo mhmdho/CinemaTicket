@@ -4,13 +4,11 @@ import datetime
 from django.utils import timezone
 
 
-# cinema_app/models.py
-
 class Room(models.Model):
     name = models.CharField(max_length=50)
     rows = models.IntegerField(default=10)
     seats_per_row = models.IntegerField(default=8)
-    image = models.ImageField(upload_to='room_images/', null=True, blank=True)  # New line
+    image = models.ImageField(upload_to='room_images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -3,6 +3,7 @@ import logging
 from django.db import connection
 from django.core.management import call_command
 
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('db_wait')
 

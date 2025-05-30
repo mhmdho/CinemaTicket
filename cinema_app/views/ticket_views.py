@@ -1,4 +1,3 @@
-# cinema_app/views/ticket_views.py
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from ..models import Booking, Showtime
@@ -13,7 +12,7 @@ def view_tickets_summary(request, showtime_id):
     ).order_by('seat_row', 'seat_number')
 
     if not bookings:
-        return render(request, 'no_ticket.html')  # Optional: handle empty case
+        return render(request, 'no_ticket.html')
 
     return render(request, 'tickets_summary.html', {
         'bookings': bookings,
