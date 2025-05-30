@@ -17,25 +17,6 @@ services:
     depends_on:
       - db
 
-  db:
-    image: postgres:16
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_DB: cinema_db
-      POSTGRES_USER: cinema_user
-      POSTGRES_PASSWORD: cinema_pass
-
-services:
-  web:
-    build: .
-    expose:
-      - "8000"
-    environment:
-      - DEBUG=False
-      - ALLOWED_HOSTS=*
-      - HOST=stdev.largent.org
-
   nginx:
     image: nginx:latest
     ports:
@@ -46,6 +27,15 @@ services:
       - media_data:/app/media
     depends_on:
       - web
+
+  db:
+    image: postgres:16
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: cinema_db
+      POSTGRES_USER: cinema_user
+      POSTGRES_PASSWORD: cinema_pass
 
 volumes:
   pgdata:
