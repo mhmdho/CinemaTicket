@@ -15,4 +15,4 @@ urlpatterns = [
     path('book/<int:showtime_id>/<int:row>/<int:seat>/', book_seat, name='book_seat'),
     # path('api/book/<int:showtime_id>/<int:row>/<int:seat>/', BookSeatAPI.as_view(), name='api_book_seat'),
     path('tickets/<int:showtime_id>/', view_tickets_summary, name='view_tickets_summary'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
