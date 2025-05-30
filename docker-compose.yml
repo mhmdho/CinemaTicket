@@ -8,8 +8,8 @@ services:
     command: gunicorn cinema_project.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
-      - media_data:/app/media
       - static_data:/app/staticfiles
+      - media_data:/app/media
     ports:
       - "8000:8000"
     environment:
@@ -30,5 +30,5 @@ services:
 
 volumes:
   pgdata:
-  media_data:
   static_data:
+  media_data:
