@@ -1,6 +1,8 @@
 # 🎬 Cinema Booking App
 
 A Django-based cinema booking system that allows users to select and book seats for showtimes in different rooms.
+This project consist of user login, admin panel and REST API support.
+
 
 ## ✅ Features
 
@@ -47,8 +49,8 @@ Before you begin, ensure you have installed:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/cinema-booking.git 
-cd cinema-booking
+git clone https://github.com/mhmdho/CinemaTicket.git 
+cd CinemaTicket
 ```
 
 2. **Install dependencies**
@@ -72,10 +74,7 @@ python manage.py runserver
 ```
 
 👉 Visit: http://localhost:8000/admin
-Login with your admin credentials
-
-
-
+and login with your admin credentials
 
 
 
@@ -89,25 +88,29 @@ docker-compose up -d --build
 
 2. **Starts all services defined in docker-compose.yml in detached mode.**
 
+3. **Applies database migrations inside the running container.**
+
 ```bash
 docker-compose exec web python manage.py migrate
 ```
-3. **Applies database migrations inside the running container.**
+
+4. **Collects static files into STATIC_ROOT for production use.**
 
 ```bash
 docker-compose exec web python manage.py collectstatic --noinput
 ```
-4. **Collects static files into STATIC_ROOT for production use.**
+
+5. **Creates a new admin user inside the container.**
 
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
-5. **Creates a new admin user inside the container.**
 
+5. **Access the app:**
 👉 Visit: http://localhost:8000/admin
 👉 Visit: http://localhost:8000/api/docs/
 
-⚠️ For production use, set DEBUG=False and enable HTTPS via Let's Encrypt or Certbot. 
+"⚠️ For production use, set DEBUG=False and enable HTTPS via Let's Encrypt or Certbot."
 
 
 ## 📁 Media Uploads
@@ -135,6 +138,37 @@ Available Endpoints:
 | GET | `/api/tickets/` | Get all tickets booked by current user |
 | POST | `/api/book/<showtime_id>/<row>/<seat>/` | Book or unbook a seat
 
+## 📁 Folder Structure
+
+cinema_project/
+├── cinema_app/                # Django app
+│   ├── models.py              # Room, Movie, Booking, etc.
+│   ├── views/
+│   │   ├── booking_views.py
+│   │   └── api_views.py
+│   ├── serializers/
+│   │   └── booking_serializer.py
+│   └── templates/
+│       ├── base.html
+│       ├── home.html
+│       ├── showtimes.html
+│       └── seats.html
+│
+├── cinema_project/
+│   ├── settings.py            # Django project settings
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── staticfiles/               # Auto-generated static files (after collectstatic)
+├── media/                     # Uploaded media files
+├── manage.py
+├── Dockerfile                 # Docker build config
+├── docker-compose.yml         # Docker services definition
+├── nginx.conf                 # Nginx config for media/static
+├── requirements.txt           # Python dependencies
+└── README.md                  # This file
+
+
 ## 🛡️ Configuration
 
 You can configure these environment variables in `docker-compose.yml`:
@@ -146,6 +180,15 @@ You can configure these environment variables in `docker-compose.yml`:
 | `SECRET_KEY` | Django secret key |
 | `DATABASE_URL` | PostgreSQL connection string (optional) |
 
+## 🛡️ Production Deployment
+For live deployment:
+
+Set DEBUG=False in settings.py
+Use domain name instead of localhost
+Enable HTTPS with Let's Encrypt/Certbot
+Use environment variables for secrets
+Add monitoring and backups for PostgreSQL
+
 ## 🧪 Optional Enhancements
 
 - Add JWT authentication for mobile apps
@@ -155,8 +198,8 @@ You can configure these environment variables in `docker-compose.yml`:
 
 ## 💬 Support
 
-If you encounter any issues during setup or deployment, feel free to open an issue or contact me — I'm happy to help!
+If you encounter any issues during setup or deployment, feel free to contact me — I'm happy to help!
 
 ## 📜 License
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+This project is licensed under my License – feel free to use it and enjoy :).
