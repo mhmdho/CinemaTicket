@@ -101,9 +101,9 @@ docker-compose exec web python manage.py createsuperuser
 ```
 
 5. **Access the app:**  
-👉 Visit: http://localhost:8000/  
-👉 Visit: http://localhost:8000/admin/  
-👉 Visit: http://localhost:8000/api/docs/  
+👉 Website: http://localhost:8000/  
+👉 Admin panel: http://localhost:8000/admin/  
+👉 API documentation: http://localhost:8000/api/docs/  
 
 <br>
 
