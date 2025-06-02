@@ -1,6 +1,6 @@
 # 🎬 Cinema Booking App
 
-A Django-based cinema booking system that allows users to select and book seats for showtimes in different rooms.
+A Django-based cinema booking system that allows users to select and book seats for showtimes in different rooms.  
 This project consist of user login, admin panel and REST API support.
 
 
@@ -16,7 +16,6 @@ This project consist of user login, admin panel and REST API support.
 - Responsive HTML templates
 - Dockerized setup for easy deployment
 
----
 
 ## 🧾 Technologies Used
 
@@ -31,7 +30,6 @@ This project consist of user login, admin panel and REST API support.
 | **Nginx** | Static/media file server |
 | **Docker & Docker Compose** | Containerization |
 
----
 
 ## 📦 Prerequisites
 
@@ -42,7 +40,6 @@ Before you begin, ensure you have installed:
 - Python 3.10+
 - PostgreSQL (for local dev if not using Docker)
 
----
 
 ## 🚀 Getting Started (Local Development)
 
@@ -73,42 +70,42 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-👉 Visit: http://localhost:8000/admin
-and login with your admin credentials
-
+👉 Visit: http://localhost:8000/admin  
+Login with your admin credentials
 
 
 ## 🐳 Running with Docker (Production Setup)
 
-1. **Build and start containers**
+1. **Build and start containers (Starts all services defined in docker-compose.yml in detached mode.)**
 
 ```bash
 docker-compose up -d --build
 ```
 
-2. **Starts all services defined in docker-compose.yml in detached mode.**
-
-3. **Applies database migrations inside the running container.**
+2. **Applies database migrations inside the running container.**
 
 ```bash
 docker-compose exec web python manage.py migrate
 ```
 
-4. **Collects static files into STATIC_ROOT for production use.**
+3. **Collects static files into STATIC_ROOT for production use.**
 
 ```bash
 docker-compose exec web python manage.py collectstatic --noinput
 ```
 
-5. **Creates a new admin user inside the container.**
+4. **Creates a new admin user inside the container.**
 
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
 
-5. **Access the app:**
-👉 Visit: http://localhost:8000/admin
-👉 Visit: http://localhost:8000/api/docs/
+5. **Access the app:**  
+👉 Visit: http://localhost:8000/  
+👉 Visit: http://localhost:8000/admin/  
+👉 Visit: http://localhost:8000/api/docs/  
+
+<br>
 
 "⚠️ For production use, set DEBUG=False and enable HTTPS via Let's Encrypt or Certbot."
 
@@ -117,16 +114,18 @@ docker-compose exec web python manage.py createsuperuser
 
 All uploaded images (room images, movie posters) are stored in:
 
+```bash
 media/
 ├── room_images/
 └── posters/
-
+```
 
 Ensure Nginx is configured to serve `/media/` correctly.
 
+
 ## 🔧 API Endpoints
 
-Swagger UI for testing APIs:
+Swagger UI for testing APIs:  
 👉 http://localhost:8000/api/docs/
 
 Available Endpoints:
@@ -138,36 +137,38 @@ Available Endpoints:
 | GET | `/api/tickets/` | Get all tickets booked by current user |
 | POST | `/api/book/<showtime_id>/<row>/<seat>/` | Book or unbook a seat
 
+
 ## 📁 Folder Structure
 
-cinema_project/
-├── cinema_app/                # Django app
-│   ├── models.py              # Room, Movie, Booking, etc.
-│   ├── views/
-│   │   ├── booking_views.py
-│   │   └── api_views.py
-│   ├── serializers/
-│   │   └── booking_serializer.py
-│   └── templates/
-│       ├── base.html
-│       ├── home.html
-│       ├── showtimes.html
-│       └── seats.html
-│
-├── cinema_project/
-│   ├── settings.py            # Django project settings
-│   ├── urls.py
-│   └── wsgi.py
-│
-├── staticfiles/               # Auto-generated static files (after collectstatic)
-├── media/                     # Uploaded media files
-├── manage.py
-├── Dockerfile                 # Docker build config
-├── docker-compose.yml         # Docker services definition
-├── nginx.conf                 # Nginx config for media/static
-├── requirements.txt           # Python dependencies
-└── README.md                  # This file
-
+```bash
+cinema_project/  
+├── cinema_app/                # Django app  
+│   ├── models.py              # Room, Movie, Booking, etc.  
+│   ├── views/  
+│   │   ├── booking_views.py  
+│   │   └── api_views.py  
+│   ├── serializers/  
+│   │   └── booking_serializer.py  
+│   └── templates/  
+│       ├── base.html  
+│       ├── home.html  
+│       ├── showtimes.html  
+│       └── seats.html  
+│  
+├── cinema_project/  
+│   ├── settings.py            # Django project settings  
+│   ├── urls.py  
+│   └── wsgi.py  
+│  
+├── staticfiles/               # Auto-generated static files (after collectstatic)  
+├── media/                     # Uploaded media files  
+├── manage.py  
+├── Dockerfile                 # Docker build config  
+├── docker-compose.yml         # Docker services definition  
+├── nginx.conf                 # Nginx config for media/static  
+├── requirements.txt           # Python dependencies  
+└── README.md                  # This file  
+```
 
 ## 🛡️ Configuration
 
@@ -183,11 +184,11 @@ You can configure these environment variables in `docker-compose.yml`:
 ## 🛡️ Production Deployment
 For live deployment:
 
-Set DEBUG=False in settings.py
-Use domain name instead of localhost
-Enable HTTPS with Let's Encrypt/Certbot
-Use environment variables for secrets
-Add monitoring and backups for PostgreSQL
+- Set DEBUG=False in settings.py
+- Use domain name instead of localhost
+- Enable HTTPS with Let's Encrypt/Certbot
+- Use environment variables for secrets
+- Add monitoring and backups for PostgreSQL
 
 ## 🧪 Optional Enhancements
 
@@ -202,4 +203,4 @@ If you encounter any issues during setup or deployment, feel free to contact me 
 
 ## 📜 License
 
-This project is licensed under my License – feel free to use it and enjoy :).
+This project is licensed under my License :).
